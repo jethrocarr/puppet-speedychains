@@ -15,6 +15,21 @@ define speedychains (
     fail("The requested provider (${chain_provider}) does not exist/is not supported.")
   }
 
+  # Set the chain protocol
+  $chain_protocol = $chain_provider ? {
+    'iptables'  => 'IPv4',
+    'ip6tables' => 'IPv6',
+    default     => 'IPv4',
+  }
+
+  # Create a puppet firewall chain resource. Although our rules will be
+  # unmanaged, by creating the chain with Puppet we can ensure it doesn't
+  # get purged by the module.
+  firewallchain { "${chain_name}:filter:${chain_protocol}":
+    purge  => false,
+    before => "speedychains-${chain_name}",
+  }
+
   # To get the "speediness" we generate a bash script with all the commands
   # to setup the firewall chain and then anytime it changes, we execute the
   # script to flush the current chain and reload it with new data.
