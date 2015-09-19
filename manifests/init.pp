@@ -1,4 +1,5 @@
-# jethrocarr-speedychains puppet module
+# speedychains
+#
 # Provides a defined resource type for creating firewall chains. This resource
 # then generates a 
 
@@ -24,7 +25,7 @@ define speedychains (
 
   # Create a puppet firewall chain resource. Although our rules will be
   # unmanaged, by creating the chain with Puppet we can ensure it doesn't
-  # get purged by the module.
+  # get purged by the module using `purge => false`.
   firewallchain { "${chain_name}:filter:${chain_protocol}":
     purge  => false,
     before => Exec["speedychains-${chain_name}"],
