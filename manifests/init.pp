@@ -27,7 +27,7 @@ define speedychains (
   # get purged by the module.
   firewallchain { "${chain_name}:filter:${chain_protocol}":
     purge  => true,
-    ignore => ['--comment "speedychains"']
+    ignore => ['--comment "speedychains"'],
     before => Exec["speedychains-${chain_name}"],
   }
 
