@@ -1,5 +1,5 @@
 {
-  "name": "jethrocar-speedychains",
+  "name": "jethrocarr-speedychains",
   "version": "1.0.0",
   "author": "jethrocarr",
   "summary": "A companion module for puppetlabs-firewall that generates huge iptables chains and applies them in seconds",
