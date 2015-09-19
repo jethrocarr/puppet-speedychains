@@ -42,6 +42,8 @@ you can do this with `puppetlabs-firewall` as per the following example:
 TODO
 
 
+
+
 ## GeoIP Example
 
 A common case will be using this as a companion module to
@@ -54,9 +56,14 @@ TODO
 
 ## Limitations
 
-Currently limited to GNU/Linux platform due to it's iptables/ip6tables focus,
+1. Currently limited to GNU/Linux platform due to it's iptables/ip6tables focus,
 however I'm very open to accepting any pull requests that can add support for
 other platforms and firewall systems.
+
+2. When listing iptables rules on a server with large chains, it will take
+ages as it tries to resolve reverse DNS. You can avoid this by calling it with
+the `-n` option, eg `iptables -n -L`. This isn't a speedchains limitation but
+rather just a default with the iptables tool on Linux.
 
 
 ## License
