@@ -1,0 +1,18 @@
+#!/bin/bash
+# Managed by jethrocarr/speedychains Puppet module.
+#
+# This script is used to generate and load the Puppet chains into the firewall.
+# Please refer to the module README.md for more information,
+#
+
+# Create the chain (if it doesn't already exist)
+ip6tables -N <%= @chain_name %>
+
+# Flush existing items in the chain.
+ip6tables -F <%= @chain_name %>
+
+# Add all records to the chain
+<% @rule_addresses.each do |ipaddress| -%>
+ip6tables -A <%= @chain_name %> -s <%= ipaddress %> -j <%= @rule_action.upcase %>
+<% end -%>
+
