@@ -26,8 +26,7 @@ define speedychains (
   # unmanaged, by creating the chain with Puppet we can ensure it doesn't
   # get purged by the module.
   firewallchain { "${chain_name}:filter:${chain_protocol}":
-    purge  => true,
-    ignore => ['--comment "speedychains"'],
+    purge  => false
     before => Exec["speedychains-${chain_name}"],
   }
 
