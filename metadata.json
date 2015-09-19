@@ -1,15 +1,14 @@
 {
-  "name": "jethrocar-geofirewall",
+  "name": "jethrocar-speedychains",
   "version": "0.0.1",
-  "author": "jethrocar",
-  "summary": "Builds firewall chains for GeoIP rules in a high-performance fashion that works with puppetlabs/firewall module",
+  "author": "jethrocarr",
+  "summary": "A companion module for puppetlabs-firewall that generates huge iptables chains and applies them in seconds",
   "license": "Apache-2.0",
-  "source": "https://github.com/jethrocarr/puppet-geofirewall",
-  "project_page": "https://github.com/jethrocarr/puppet-geofirewall",
-  "issues_url": "https://github.com/jethrocarr/puppet-geofirewall/issues",
+  "source": "https://github.com/jethrocarr/puppet-speedychains",
+  "project_page": "https://github.com/jethrocarr/puppet-speedychains",
+  "issues_url": "https://github.com/jethrocarr/puppet-speedychains/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-    {"name":"jethrocarr-rirs","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
 }
 

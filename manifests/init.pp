@@ -1,41 +1,40 @@
-# == Class: geofirewall
-#
-# Full description of class geofirewall here.
-#
-# === Parameters
-#
-# Document parameters here.
-#
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
-#
-# === Variables
-#
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the function of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
-#
-# === Examples
-#
-#  class { 'geofirewall':
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#  }
-#
-# === Authors
-#
-# Author Name <author@domain.com>
-#
-# === Copyright
-#
-# Copyright 2015 Your name here, unless otherwise noted.
-#
-class geofirewall {
+# jethrocarr-speedychains puppet module
+# Provides a defined resource type for creating firewall chains. This resource
+# then generates a 
+
+define speedychains (
+  $chain_name      = $name,
+  $chain_provider  = 'iptables',
+  $rule_action     = 'ACCEPT',
+  $rule_addresses  = [],
+) {
+  require speedychains::install
+
+  # Make sure the provider is supported
+  if !member(['iptables', 'ip6tables'], $chain_provider) {
+    fail("The requested provider (${chain_provider}) does not exist/is not supported.")
+  }
+
+  # To get the "speediness" we generate a bash script with all the commands
+  # to setup the firewall chain and then anytime it changes, we execute the
+  # script to flush the current chain and reload it with new data.
+
+  file { "speedychains-${chain_name}":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0700',
+    path    => "${speedychains::install::chain_scripts}/${chain_name}.sh",
+    content => template("speedychains/script_${chain_provider}.sh.erb"),
+    notify  => Exec["speedychains-${chain_name}"],
+  }
+
+  exec { "speedychains-${chain_name}":
+    command     => "${speedychains::install::chain_scripts}/${chain_name}.sh",
+    refreshonly => true,
+  }
 
 
 }
+
+# vi:smartindent:tabstop=2:shiftwidth=2:expandtab:
