@@ -14,6 +14,7 @@ class speedychains::install (
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
+    purge  => true,   # Ensures old scripts get discarded
   }
 
   # Make sure we're on a supported OS
