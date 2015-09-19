@@ -63,17 +63,14 @@ other platforms and firewall systems.
 2. When listing iptables rules on a server with large chains, it will take
 ages as it tries to resolve reverse DNS. You can avoid this by calling it with
 the `-n` option, eg `iptables -n -L`. This isn't a speedchains limitation but
-rather just a default with the iptables tool on Linux.
+rather just a default with the iptables tool on Linux. You can also decide to
+list specific chains, eg just the INPUT rules with `iptables -n -L INPUT`.
 
-3. You can't use the firewall module's feature to purge all chains since this
-chain is technically unmanaged by Puppet, ie this will break this module:
-
-    resources { 'firewallchain':
-      purge => true,
-    }
-
-You can safely still use the purge option to purge contents of specific chains
-if you're using the firewall module to define your own additional chains.
+3. You can't use the firewall module's feature to purge all chains
+(`resources { 'firewallchain': purge => true }`) since this chain is
+technically unmanaged by Puppet. You can safely still use the purge option to
+purge contents of specific chains if you're using the firewall module to define
+your own additional chains.
 
 
 ## License
