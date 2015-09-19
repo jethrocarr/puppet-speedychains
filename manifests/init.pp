@@ -27,7 +27,7 @@ define speedychains (
   # get purged by the module.
   firewallchain { "${chain_name}:filter:${chain_protocol}":
     purge  => false,
-    before => "speedychains-${chain_name}",
+    before => Exec["speedychains-${chain_name}"],
   }
 
   # To get the "speediness" we generate a bash script with all the commands
