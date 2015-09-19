@@ -13,6 +13,6 @@ iptables -F <%= @chain_name %>
 
 # Add all records to the chain
 <% @rule_addresses.each do |ipaddress| -%>
-iptables -A <%= @chain_name %> -s <%= ipaddress %> -j <%= @rule_action.upcase %> --comment "speedychains"
+iptables -A <%= @chain_name %> -s <%= ipaddress %> -j <%= @rule_action.upcase %> -m comment --comment "speedychains"
 <% end -%>
 
