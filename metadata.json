@@ -1,6 +1,6 @@
 {
   "name": "jethrocar-speedychains",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "jethrocarr",
   "summary": "A companion module for puppetlabs-firewall that generates huge iptables chains and applies them in seconds",
   "license": "Apache-2.0",
@@ -8,7 +8,8 @@
   "project_page": "https://github.com/jethrocarr/puppet-speedychains",
   "issues_url": "https://github.com/jethrocarr/puppet-speedychains/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-firewall","version_requirement":">= 1.7.0"}
   ]
 }
 
